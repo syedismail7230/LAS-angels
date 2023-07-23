@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet" />
+  <base target="_top" />
+  <h1>Laurel Achivement System</h1>
+  <h3>Developed by and for The Dept of AI&ML.</h3>
+  <style>
+    * {
+      font-family: "Arimo", sans-serif;
+    }
+
+    #result {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    h1 {
+      color: #ccc;
+      font-family: "Abril Fatface", cursive;
+    }
+
+    h3 {
+      color: #ccc;
+      font-family: "Arimo", sans-serif;
+    }
+
+    body {
+      background-color: black;
+    }
+
+    input {
+      width: 40%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    table {
+      font-family: times;
+      border-collapse: collapse;
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+
+<body align="center">
+  <input type="number" id="id" placeholder="Enter ID" />
+  <br />
+  <input type="submit" value="GET DETAIL" onclick="info()" />
+  <hr />
+  <div id="result"></div>
+  <script>
+    function info() {
+        let txt = document.querySelector("#id").value;
+        let updateLocation = document.querySelector("#result");
+        //you can add other element here
+        updateLocation.innerHTML = "Getting detail...";
+
+        function onFailure(error) {
+          let warning = "<span style='color:red'>" + error + "</span>";
+          updateLocation.innerHTML = warning;
+        }
+
+        function onSuccess(response) {
+          let result = "<span style='color:green'>" + response + "</span>";
+          updateLocation.innerHTML = result;
+        }
+        google.script.run
+          .withFailureHandler(onFailure)
+          .withSuccessHandler(onSuccess)
+          .submitDT(txt);
+      }
+  </script>
+</body>
+
+</html>
